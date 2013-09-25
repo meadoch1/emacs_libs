@@ -185,21 +185,21 @@
 ;; Enable EDE (Project Management) features
 (global-ede-mode 1)
 
-(add-to-list 'load-path  "~/emacs_libs/ecb-2.40")
+(add-to-list 'load-path  "~/emacs_libs/ecb")
 (require 'ecb)
 
 
 (require 'window-numbering)
 (window-numbering-mode 1)
 
-(add-to-list 'load-path "~/emacs_libs/feature-mode")
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+;;(add-to-list 'load-path "~/emacs_libs/feature-mode")
+;;(require 'feature-mode)
+;;(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell
       (replace-regexp-in-string "[[:space:]\n]*$" ""
-        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+  (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 (when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))

@@ -3,7 +3,7 @@
 (setq mac_option_modifier 'meta);  sets the Option key as Meta
 ;; change "~/elisp/" as appropiate
 (setq load-path (cons emacs-lib-path load-path))
-(add-to-list 'load-path (concat emacs-lib-path "yasnippet-0.6.1c"))
+;;(add-to-list 'load-path (concat emacs-lib-path "yasnippet-0.6.1c"))
 
 
 (require 'config-runner)
@@ -26,42 +26,33 @@
 ;;(define-key global-map "\C-cc" 'org-capture)
 (setq org-capture-templates
   '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
+   "* TODO %?\n  %i\n  %a")
    ("j" "Journal" entry (file+datetree "~/org/journal.org")
     "* %?\nEntered on %U\n  %i\n  %a")))
 ;;MobileOrg settings
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 
-(require 'org-latex)
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-             '("article"
-               "\\documentclass{article}"
-               ("\\section{%s}" . "\\section*{%s}")))
-(add-to-list 'org-export-latex-classes
-          '("koma-article"
-             "\\documentclass{scrartcl}"
-             ("\\section{%s}" . "\\section*{%s}")
-             ("\\subsection{%s}" . "\\subsection*{%s}")
-             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-             ("\\paragraph{%s}" . "\\paragraph*{%s}")
-             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-;;(setq org-latex-to-pdf-process '("texi2dvi --pdf --clean --verbose --batch %f"))
+;;(setq org-clock-persist 'history)
+;;(org-clock-persistence-insinuate)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "12dbe6c1e8c9d3b0470298ab30cf5c95378775a4e2a49ca7acc0424df0c43b98" "007b69ffec046a5842e34fea287b23c49175dfd6c6d5a0d9cdf150a2e8a8979f" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(custom-theme-load-path (quote ("/home/chris/.emacs.d/" "~/emacs_libs/themes/" "~/emacs_libs/themes/emacs-color-theme-solarized/" custom-theme-directory t)))
  '(ecb-options-version "2.40")
- '(exec-path (quote ("/usr/local/Cellar/erlang/R14B03/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/Applications/Emacs.app/Contents/MacOS/bin" "/usr/texbin" "/Library/Frameworks/Python.framework/Versions/2.7/bin")))
+ '(exec-path (quote ("/usr/bin" "/bin" "/usr/sbin" "/sbin" "/usr/texbin")))
+ '(mediawiki-site-alist (quote (("FLA Wiki" "http://wiki.c2c.americadirect.net/" "chris.meadows" "EQnjMfcBY2cFaZC8cuF" "Main Page"))))
  '(org-adapt-indentation t)
- '(org-agenda-files (quote ("~/org/gtd.org" "~/org/RCC.org" "~/org/journal.org" "~/org/Olive.org" "~/org/Work.org")))
+ '(org-agenda-files nil)
+ '(org-clocktable-defaults (quote (:maxlevel 2 :lang "en" :scope file :block nil :wstart 1 :mstart 1 :tstart nil :tend nil :step nil :stepskip0 nil :fileskip0 nil :tags nil :emphasize nil :link nil :narrow 70! :indent t :formula nil :timestamp nil :level nil :tcolumns nil :formatter nil)))
  '(org-export-latex-default-class "koma-article")
  '(org-special-ctrl-a/e t)
  '(org-tags-exclude-from-inheritance (quote ("project")))
  '(org-use-tag-inheritance nil)
+ '(package-archives (quote (("marmalade" . "http://marmalade-repo.org/packages/") ("org" . "http://orgmode.org/elpa/") ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 
 
@@ -72,16 +63,16 @@
 
 ;;custom color settings
 ;;(load-theme 'solarized-dark t)
-(require 'color-theme)
-(require 'color-theme-solarized)
-  (color-theme-initialize)
-  ;;	(color-theme-calm-forest)
-  ;;	(color-theme-goldenrod)
-  ;;	(color-theme-robin-hood)
-  ;;	(color-theme-gnome2)
-;;    (color-theme-ld-dark)
-;;	(color-theme-clarity)
-        (color-theme-solarized-dark)
+;; (require 'color-theme)
+;; (require 'color-theme-solarized)
+;;   (color-theme-initialize)
+;;   ;;	(color-theme-calm-forest)
+;;   ;;	(color-theme-goldenrod)
+;;   ;;	(color-theme-robin-hood)
+;;   ;;	(color-theme-gnome2)
+;; ;;    (color-theme-ld-dark)
+;; ;;	(color-theme-clarity)
+;;   (color-theme-solarized-dark)
 
 ;;  The value is in 1/10pt, so 100 will give you 10pt, etc.
 (custom-set-faces
@@ -89,8 +80,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :foundry "unknown" :family "DejaVu Sans")))))
+ '(default ((t (:inherit nil :stipple nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :foundry "unknown" :family "Consolas")))))
 
+(load-theme 'zenburn t nil)
+;;(load-theme 'railscasts t nil)
 
 ;; Don't turn on linum-mode by default, it crashes org-mode. Ok to
 ;; turn it on for various modes, however.
@@ -103,26 +96,26 @@
 ; ----------------------------------------------------------------------
 ; Automatically enable linum mode for various modes
 (setq modes-to-hook-with-linum '(c-mode-hook
-                                 csv-mode-hook
-                                 emacs-lisp-mode-hook
-                                 coffee-mode-hook
-                                 feature-mode-hook
-                                 java-mode-hook
-                                 js-mode-hook
-                                 javascript-mode-hook
-                                 espresso-mode-hook
-                                 haml-mode-hook
-                                 lisp-mode-hook
-                                 nxml-mode-hook
-                                 php-mode-hook
-                                 ruby-mode-hook
-                                 sass-mode-hook
-                                 scss-mode-hook
-                                 sh-mode-hook
-                                 text-mode-hook
-                                 textile-mode-hook
-                                 xml-mode-hook
-                                 yaml-mode-hook))
+   csv-mode-hook
+   emacs-lisp-mode-hook
+   coffee-mode-hook
+   feature-mode-hook
+   java-mode-hook
+   js-mode-hook
+   javascript-mode-hook
+   espresso-mode-hook
+   haml-mode-hook
+   lisp-mode-hook
+   nxml-mode-hook
+   php-mode-hook
+   ruby-mode-hook
+   sass-mode-hook
+   scss-mode-hook
+   sh-mode-hook
+   text-mode-hook
+   textile-mode-hook
+   xml-mode-hook
+   yaml-mode-hook))
 
 (defun hook-linum-mode (mode)
   (add-hook mode 'enable-linum-mode))
@@ -200,9 +193,9 @@
 
 ; ----------------------------------------------------------------------
 ;; YASnippet
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory (concat emacs-lib-path "yasnippet-0.6.1c/snippets/"))
+;;(require 'yasnippet)
+;;(yas/initialize)
+;;(yas/load-directory (concat emacs-lib-path "yasnippet-0.6.1c/snippets/"))
 ; end YASnippet
 ; ----------------------------------------------------------------------
 
@@ -237,7 +230,7 @@ leave-markers)
       (swap-values 'startr2 'endr2))
   (if (> startr1 startr2)
       (progn (swap-values 'startr1 'startr2)
-             (swap-values 'endr1 'endr2)))
+       (swap-values 'endr1 'endr2)))
   (if (= startr1 endr1)
       (setq endr1 startr2))
   (if (= startr2 endr2)
@@ -257,22 +250,22 @@ See `transpose-regions' for LEAVE-MARKERS."
   (let ((n (length regions)))
     (while (> n 1)
       (let ((r (random n)))
-        (if (zerop r)
-            (setq regions (cdr regions))
-          (let* ((a (car regions)) (b (elt regions r))
-                 (x (- (- (cdr a) (car a)) (- (cdr b) (car b)))))
-            (transpose-regions-allow-empty
-             (car a) (cdr a) (car b) (cdr b) leave-markers)
-            (setq regions (cdr regions))
-            (let ((iter regions))
-              (while iter
-                (let ((i (car iter)))
-                  (if (eq i b)
-                      (progn (setcdr i (+ x (cdr i)))
-                             (setq iter nil))
-                    (setcar i (+ x (car i)))
-                    (setcdr i (+ x (cdr i)))))
-                (setq iter (cdr iter)))))))
+  (if (zerop r)
+      (setq regions (cdr regions))
+    (let* ((a (car regions)) (b (elt regions r))
+     (x (- (- (cdr a) (car a)) (- (cdr b) (car b)))))
+      (transpose-regions-allow-empty
+       (car a) (cdr a) (car b) (cdr b) leave-markers)
+      (setq regions (cdr regions))
+      (let ((iter regions))
+  (while iter
+    (let ((i (car iter)))
+      (if (eq i b)
+    (progn (setcdr i (+ x (cdr i)))
+     (setq iter nil))
+  (setcar i (+ x (car i)))
+  (setcdr i (+ x (cdr i)))))
+    (setq iter (cdr iter)))))))
       (setq n (1- n)))))
 
 (defun shuffle-lines (beg end)
@@ -283,13 +276,13 @@ See `transpose-regions' for LEAVE-MARKERS."
       (narrow-to-region beg end)
       (goto-char (point-min))
       (let (lines)
-        (while (not (eobp))
-          (let ((beg (point)))
-            (end-of-line)
-            (let ((end (point)))
-              (setq lines (cons (cons beg end) lines))))
-          (forward-line))
-        (shuffle-regions lines t)))))
+  (while (not (eobp))
+    (let ((beg (point)))
+      (end-of-line)
+      (let ((end (point)))
+  (setq lines (cons (cons beg end) lines))))
+    (forward-line))
+  (shuffle-regions lines t)))))
 (put 'narrow-to-region 'disabled nil)
 
 
@@ -320,18 +313,18 @@ See `transpose-regions' for LEAVE-MARKERS."
   "If you have 2 windows, it swaps them."
   (interactive)
   (cond ((/= (count-windows) 2)
-         (message "You need exactly 2 windows to do this."))
-        (t
-         (let* ((w1 (first (window-list)))
-                (w2 (second (window-list)))
-                (b1 (window-buffer w1))
-                (b2 (window-buffer w2))
-                (s1 (window-start w1))
-                (s2 (window-start w2)))
-           (set-window-buffer w1 b2)
-           (set-window-buffer w2 b1)
-           (set-window-start w1 s2)
-           (set-window-start w2 s1))))
+   (message "You need exactly 2 windows to do this."))
+  (t
+   (let* ((w1 (first (window-list)))
+    (w2 (second (window-list)))
+    (b1 (window-buffer w1))
+    (b2 (window-buffer w2))
+    (s1 (window-start w1))
+    (s2 (window-start w2)))
+     (set-window-buffer w1 b2)
+     (set-window-buffer w2 b1)
+     (set-window-start w1 s2)
+     (set-window-start w2 s1))))
   (other-window 1))
 
 ;; TODO: This defun needs a much better name!
@@ -339,12 +332,12 @@ See `transpose-regions' for LEAVE-MARKERS."
   "Splits window right, but instead of duplicating the current buffer, it opens the last buffer you visited before this one"
   (interactive)
   (cond ((/= (count-windows) 1)
-         (message "You need exactly 1 window open to do this."))
-        (t
-         (split-window-right)
-         (let* ((w2 (second (window-list)))
-                (b2 (second (buffer-list))))
-           (set-window-buffer w2 b2)))))
+   (message "You need exactly 1 window open to do this."))
+  (t
+   (split-window-right)
+   (let* ((w2 (second (window-list)))
+    (b2 (second (buffer-list))))
+     (set-window-buffer w2 b2)))))
 
 ;; like C-x o, only backwards. Yay!
 ;; doesn't work with C-u, though. boo.
@@ -373,9 +366,18 @@ See `transpose-regions' for LEAVE-MARKERS."
 (defun make-emacs-shutup-about-font-lock-syntactic-keywords ()
   (interactive)
   (add-to-list 'byte-compile-not-obsolete-vars
-               'font-lock-beginning-of-syntax-function)
+   'font-lock-beginning-of-syntax-function)
   (add-to-list 'byte-compile-not-obsolete-vars
-               'font-lock-syntactic-keywords))
+   'font-lock-syntactic-keywords))
+
+;; Workaround the annoying warnings:
+;;    Warning (mumamo-per-buffer-local-vars):
+;;    Already 'permanent-local t: buffer-file-name
+(when (and (>= emacs-major-version 24)
+     (>= emacs-minor-version 2))
+  (eval-after-load "mumamo"
+    '(setq mumamo-per-buffer-local-vars
+     (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
 
 ;; Disable set-goal-column because I finger fudge it all the time
 (global-unset-key (kbd "\C-x C-n"))
@@ -395,11 +397,11 @@ See `transpose-regions' for LEAVE-MARKERS."
 
 (defmacro .emacs-eproject-key (key command)
   (cons 'progn
-        (loop for (k . p) in (list (cons key 4) (cons (upcase key) 1))
-              collect
-              `(global-set-key
-                (kbd ,(format "C-c p %s" k))
-                (.emacs-curry ,command ,p)))))
+  (loop for (k . p) in (list (cons key 4) (cons (upcase key) 1))
+  collect
+  `(global-set-key
+    (kbd ,(format "C-c p %s" k))
+    (.emacs-curry ,command ,p)))))
 
 (.emacs-eproject-key "k" eproject-kill-project-buffers)
 (.emacs-eproject-key "v" eproject-revisit-project)
@@ -410,7 +412,7 @@ See `transpose-regions' for LEAVE-MARKERS."
   (interactive)
   (message "building project tags")
   (let ((root (eproject-root)))
-    (shell-command (concat "ctags -e -R --extra=+fq --exclude=db --exclude=extjs --exclude=ext-* --exclude=test --exclude=.git --exclude=public -f " root "TAGS " root)))
+    (shell-command (concat "etags -e -R --extra=+fq --exclude=db --exclude=extjs --exclude=ext-* --exclude=test --exclude=.git --exclude=public -f " root "TAGS " root)))
   (visit-project-tags)
   (message "tags built successfully"))
 
@@ -419,3 +421,25 @@ See `transpose-regions' for LEAVE-MARKERS."
   (let ((tags-file (concat (eproject-root) "TAGS")))
     (visit-tags-table tags-file)
     (message (concat "Loaded " tags-file))))
+
+;; Save all tempfiles in $TMPDIR/emacs$UID/
+(setq emacs-tmp-dir "~/emacstmps/")
+    (setq backup-directory-alist
+  `((".*" . ,emacs-tmp-dir)))
+    (setq auto-save-file-name-transforms
+  `((".*" ,emacs-tmp-dir t)))
+    (setq auto-save-list-file-prefix
+  emacs-tmp-dir)
+(put 'upcase-region 'disabled nil)
+
+;; (defun copy-from-osx ()
+;;   (shell-command-to-string "pbpaste"))
+
+;; (defun paste-to-osx (text &optional push)
+;;   (let ((process-connection-type nil))
+;;     (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+;;       (process-send-string proc text)
+;;       (process-send-eof proc))))
+
+;; (setq interprogram-cut-function 'paste-to-osx)
+;; (setq interprogram-paste-function 'copy-from-osx)

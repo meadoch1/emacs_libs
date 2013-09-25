@@ -5,13 +5,13 @@
 ;;(require 'org-config)
 
 
-;;(set-frame-height (selected-frame) 75) 
-;;(set-frame-width (selected-frame) 100) 
+;;(set-frame-height (selected-frame) 75)
+;;(set-frame-width (selected-frame) 100)
 
 ;; Add the below lines *at the end* of your .emacs. This
 ;; ensures that packages installed with package manager
 ;; overrides other local installation
-(require 'package)
-(package-initialize)
+;;(require 'package)
+;;(package-initialize)
 
 (provide 'config-runner)
